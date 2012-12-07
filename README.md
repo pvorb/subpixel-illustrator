@@ -25,7 +25,9 @@ Usage
 -----
 
  1. First, make a screenshot of some text and save it as a PNG file
+
     ![Example input](https://raw.github.com/pvorb/subpixel-illustrator/master/src/test/resources/example-in.png)
+
  2. Open the program by double clicking on the JAR file
  3. Click on “Choose source image ...”
  4. Adjust the scale factor (optional; per default, each pixel will result in a
