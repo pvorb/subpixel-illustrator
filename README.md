@@ -15,7 +15,6 @@ You can download the
 [runnable JAR file](https://repo.vorb.de/downloads/subpixel-illustrator.jar) or
 install the application
 [via Java Web Start](https://repo.vorb.de/downloads/subpixel-illustrator.jnlp).
-(Java 6 or higher required)
 
 
 Requirements
@@ -33,13 +32,21 @@ Usage
 
  2. Open the program by double clicking on the JAR file
  3. Click on “Choose source image ...”
- 4. Adjust the scale factor (optional; per default, each pixel will result in a
+ 4. You can preview the output image, by clicking the preview button
+ 5. Adjust the scale factor (optional; per default, each pixel will result in a
     9 × 9 square)
- 5. Hit “Scale!” and choose a destination for the resulting PNG image.
+ 6. Hit “Save ...” and choose a destination for the resulting PNG image.
 
 Here's the result of our example
 
 ![Example output](https://raw.github.com/pvorb/subpixel-illustrator/master/src/test/resources/example-out.png)
+
+
+Changes
+-------
+
+Changes will be documented in the
+[changelog](https://github.com/pvorb/subpixel-illustrator/blob/master/README.md).
 
 
 License
