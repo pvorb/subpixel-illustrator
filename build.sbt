@@ -2,7 +2,7 @@ name := "subpixel-illustrator"
 
 organization := "de.vorb"
 
-version := "1.0.0-RELEASE"
+version := "1.0.1-RELEASE"
 
 scalaVersion := "2.10.0"
 
