@@ -14,16 +14,18 @@ import javax.swing.ImageIcon
  * Simple application that lets you scale an image
  */
 object SubpixelIllustrator extends SimpleSwingApplication {
-
   try {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-  } catch { case e: Throwable => }
+  } catch { case _: Throwable => }
 
   /**
    * Creates the GUI.
    */
   def top = new MainFrame {
     title = "Subpixel Illustrator"
+    try {
+      iconImage = ImageIO.read(getClass.getResource("/logo.png"))
+    } catch { case _: Throwable => }
 
     val factor = new SpinnerNumberModel(9, 3, 60, 3)
     val openResult = new CheckBox {
