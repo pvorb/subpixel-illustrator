@@ -3,13 +3,12 @@ package de.vorb.subpixelillustrator
 import java.awt.Desktop
 import java.awt.image.BufferedImage
 import java.io.File
-
 import scala.swing._
 import scala.swing.event.ButtonClicked
-
 import javax.imageio.ImageIO
 import javax.swing.{ JOptionPane, JSpinner, SpinnerNumberModel, UIManager }
 import javax.swing.filechooser.FileFilter
+import javax.swing.ImageIcon
 
 /**
  * Simple application that lets you scale an image
@@ -18,7 +17,7 @@ object SubpixelIllustrator extends SimpleSwingApplication {
 
   try {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-  } catch { case e => }
+  } catch { case e: Throwable => }
 
   /**
    * Creates the GUI.
@@ -32,6 +31,12 @@ object SubpixelIllustrator extends SimpleSwingApplication {
     }
     var source: File = null
     var ext: String = null
+
+    def warnNoInputFile() =
+      JOptionPane.showMessageDialog(self,
+        "Please choose a source image first",
+        "No source file specified",
+        JOptionPane.WARNING_MESSAGE)
 
     contents = new BoxPanel(Orientation.Vertical) {
       border = Swing.EmptyBorder(8, 40, 8, 40)
@@ -68,20 +73,44 @@ object SubpixelIllustrator extends SimpleSwingApplication {
       contents += new FlowPanel {
         contents += new Label("Scale factor")
         contents += Component.wrap(new JSpinner(factor))
+
+        contents += new Button {
+          text = "Preview"
+
+          reactions += {
+            case ButtonClicked(b) =>
+              if (source == null)
+                warnNoInputFile()
+              else
+                try {
+                  val result = scaleUp(ImageIO.read(source),
+                    factor.getNumber.intValue)
+                  new Dialog(top) {
+                    title = "Preview"
+                    modal = true
+                    contents = new Label {
+                      icon = new ImageIcon(result)
+                    }
+
+                    centerOnScreen()
+                    visible = true
+                  }
+                } catch {
+                  case e => e.printStackTrace
+                }
+          }
+        }
       }
 
       // save button
       contents += new FlowPanel {
         contents += new Button {
-          text = "Scale!"
+          text = "Save as ..."
 
           reactions += {
             case ButtonClicked(b) =>
               if (source == null)
-                JOptionPane.showMessageDialog(self,
-                  "Please choose a source image first",
-                  "No source file specified",
-                  JOptionPane.WARNING_MESSAGE)
+                warnNoInputFile()
               else {
                 val fc = new FileChooser {
                   title = "Save result"
@@ -107,10 +136,11 @@ object SubpixelIllustrator extends SimpleSwingApplication {
                       try {
                         Desktop.getDesktop().open(destination)
                       } catch {
-                        case _ => JOptionPane.showMessageDialog(self,
-                          "The result cannot be opened.",
-                          "Missing permissions",
-                          JOptionPane.WARNING_MESSAGE)
+                        case _ =>
+                          JOptionPane.showMessageDialog(self,
+                            "The result cannot be opened.",
+                            "Missing permissions",
+                            JOptionPane.WARNING_MESSAGE)
                       }
                   } catch {
                     case _ => JOptionPane.showMessageDialog(self,
