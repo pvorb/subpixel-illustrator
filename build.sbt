@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 name := "subpixel-illustrator"
 
 organization := "de.vorb"
@@ -10,6 +12,6 @@ scalaVersion := "2.10.0"
 libraryDependencies += "org.scala-lang" % "scala-swing" % "2.10.0"
 
 
-com.github.retronym.SbtOneJar.oneJarSettings
+assemblySettings
 
-mainClass in oneJar := Some("de.vorb.subpixelillustrator.SubpixelIllustrator")
+mainClass in assembly := Some("de.vorb.subpixelillustrator.SubpixelIllustrator")
