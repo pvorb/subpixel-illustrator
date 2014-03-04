@@ -12,9 +12,9 @@ Download
 --------
 
 You can download the
-[runnable JAR file](https://repo.vorb.de/downloads/subpixel-illustrator.jar) or
+[runnable JAR file](http://repo.vorb.de/downloads/subpixel-illustrator.jar) or
 install the application
-[via Java Web Start](https://repo.vorb.de/downloads/subpixel-illustrator.jnlp).
+[via Java Web Start](http://repo.vorb.de/downloads/subpixel-illustrator.jnlp).
 
 
 Requirements
